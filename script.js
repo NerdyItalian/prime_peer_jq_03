@@ -40,11 +40,19 @@ function search(query){
 }
 
 function searchCallback(results) {
+	var count = 1;
+	var cell = '';
 	for (var i = 0; i < results.length; i++){
 	    var games = results[i];
 	    var hiddenInfo = '<div class="bonus">' + games.deck + '<br>'  + games.original_release_date + '</div>'
-	    $('.searchResults').append('<div class="col-md-3"><img src="' + games.image.thumb_url + '"class="movieImage"/><br>'  + games.name + hiddenInfo +'</div>');
-	};
+	    cell += '<div class="col-md-2"><img src="' + games.image.thumb_url + '"class="movieImage"/><br>'  + games.name + hiddenInfo +'</div>';
+		count++
+		if (count == 6){
+			$(".searchResults").append('<div class="row">' + cell + '</div>');
+			count = 0;
+			cell = '';
+		}
+		};
 	};
 
 
