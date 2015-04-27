@@ -1,15 +1,18 @@
-var apikey = 'YOUR-API-KEY'; // Put your API key here
-
+var apikey = 'e27fa347f5134d05d053b02acb00c1153f892615'; // Put your API key here
+var userSearch;
+var games;
 // Use this function to do stuff with your results. 
 // It is called after 'search' is executed.
-function searchCallback(results) {
-    console.log(results);
-}
+
 
 $(document).ready(function() {
+	$(".btn").on("click", function(){
+		userSearch = $("#search").val();
+		search(userSearch);
+		console.log()
+	});
 
-	// Start the search here!
-	search('batman');
+
 });
 
 // HELPER FUNCTION
@@ -21,7 +24,7 @@ function search(query){
 	    dataType: 'jsonp',
 	    crossDomain: true,
 	    jsonp: 'json_callback',
-	    url: 'http://www.giantbomb.com/api/search/?format=jsonp&api_key=' + apikey +'&query=' + encodeURI(query),
+	    url: 'http://www.giantbomb.com/api/search/?format=jsonp&resources=game&api_key=' + apikey +'&query=' + encodeURI(query),
 	    complete: function() {
 	        console.log('ajax complete');
 	    },
@@ -31,3 +34,14 @@ function search(query){
 	});
 
 }
+
+function searchCallback(results) {
+	for (var i = 0; i < results.length; i++){
+	    var games = results[i];
+	    console.log(Object.getOwnPropertyNames(games.image));
+	    //WE NEED TO FIX THIS RIGHT HERE!!!! NOW!
+	    $('.searchResults').append('<div class=col-md-2>' + games.name + "<img src='games.image.thumb_url'</img></div>');
+	};
+	};
+
+
