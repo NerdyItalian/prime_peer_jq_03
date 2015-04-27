@@ -38,9 +38,7 @@ function search(query){
 function searchCallback(results) {
 	for (var i = 0; i < results.length; i++){
 	    var games = results[i];
-	    console.log(Object.getOwnPropertyNames(games.image));
-	    //WE NEED TO FIX THIS RIGHT HERE!!!! NOW!
-	    $('.searchResults').append('<div class=col-md-2>' + games.name + "<img src='games.image.thumb_url'</img></div>');
+	    $('.searchResults').append('<div class=col-md-3><img src="' + games.image.thumb_url + '"/><br>'  + games.name + '</div>');
 	};
 	};
 
