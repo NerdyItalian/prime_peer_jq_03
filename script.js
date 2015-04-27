@@ -12,6 +12,10 @@ $(document).ready(function() {
 		console.log()
 	});
 
+	$(".searchResults").on("click", "img",function(){
+
+		$(this).siblings().toggleClass("bonus");
+	})
 
 });
 
@@ -38,7 +42,8 @@ function search(query){
 function searchCallback(results) {
 	for (var i = 0; i < results.length; i++){
 	    var games = results[i];
-	    $('.searchResults').append('<div class=col-md-3><img src="' + games.image.thumb_url + '"/><br>'  + games.name + '</div>');
+	    var hiddenInfo = '<div class="bonus">' + games.deck + '<br>'  + games.original_release_date + '</div>'
+	    $('.searchResults').append('<div class="col-md-3"><img src="' + games.image.thumb_url + '"class="movieImage"/><br>'  + games.name + hiddenInfo +'</div>');
 	};
 	};
 
