@@ -36,13 +36,14 @@ function search(query){
 }
 
 function searchCallback(results) {
-	var count = 1;
+	$(".searchResults").empty();
+	var count = 0;
 	var cell = '';
 	for (var i = 0; i < results.length; i++){
 	    var games = results[i];
 	    if (games.image.hasOwnProperty('icon_url')){
-	    	var hiddenInfo = '<div class="bonus">' + '<br>' + games.deck + '<br>'  + games.original_release_date + '</div>'
-	    	cell += '<div class="col-md-2"><img class="img-thumbnail" src="' + games.image.icon_url + '"class="movieImage"/><br>'  + games.name + hiddenInfo +'</div>';
+	    	var hiddenInfo = '<br><div class="bonus"><br><strong>Game Description: </strong>' + games.deck + '<br><strong>Game Release Date: </strong>'  + games.original_release_date + '</div>'
+	    	cell += '<div class="col-md-2"><img class="img-thumbnail" src="' + games.image.icon_url + '"/><br><h3>'  + games.name + '</h3>' + hiddenInfo +'</div>';
 			count++
 			if (count == 6){
 				$(".searchResults").append('<div class="row">' + cell + '</div>');

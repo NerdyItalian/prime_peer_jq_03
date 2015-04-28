@@ -5,3 +5,7 @@
 .search {
 	margin: 4em;
 }
+
+img:hover {
+	opacity: 0.4;
+}
