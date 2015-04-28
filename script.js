@@ -1,9 +1,5 @@
 var apikey = 'e27fa347f5134d05d053b02acb00c1153f892615'; // Put your API key here
 var userSearch;
-var games;
-// Use this function to do stuff with your results. 
-// It is called after 'search' is executed.
-
 
 $(document).ready(function() {
 	$(".btn").on("click", function(){
@@ -40,19 +36,23 @@ function search(query){
 }
 
 function searchCallback(results) {
-	var count = 1;
+	$(".searchResults").empty();
+	var count = 0;
 	var cell = '';
 	for (var i = 0; i < results.length; i++){
 	    var games = results[i];
-	    var hiddenInfo = '<div class="bonus">' + games.deck + '<br>'  + games.original_release_date + '</div>'
-	    cell += '<div class="col-md-2"><img src="' + games.image.thumb_url + '"class="movieImage"/><br>'  + games.name + hiddenInfo +'</div>';
-		count++
-		if (count == 6){
-			$(".searchResults").append('<div class="row">' + cell + '</div>');
-			count = 0;
-			cell = '';
-		}
+	    if (games.image.hasOwnProperty('icon_url')){
+	    	var hiddenInfo = '<br><div class="bonus"><br><strong>Game Description: </strong>' + games.deck + '<br><strong>Game Release Date: </strong>'  + games.original_release_date + '</div>'
+	    	cell += '<div class="col-md-2"><img class="img-thumbnail" src="' + games.image.icon_url + '"/><br><h3>'  + games.name + '</h3>' + hiddenInfo +'</div>';
+			count++
+			if (count == 6){
+				$(".searchResults").append('<div class="row">' + cell + '</div>');
+				count = 0;
+				cell = '';
+			}
 		};
-	};
+	}
+	$(".searchResults").append('<div class="row">' + cell + '</div>');
+};
 
 
